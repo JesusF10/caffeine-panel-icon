@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Coffee cup body -->
+  <path d="M5 9v7.5c0 1.38 1.12 2.5 2.5 2.5h5c1.38 0 2.5-1.12 2.5-2.5V9" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Coffee cup handle -->
+  <path d="M15 11.5h1c1.1 0 2 .9 2 2s-.9 2-2 2h-1" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Coffee cup rim -->
+  <ellipse cx="10" cy="9" rx="5" ry="1" fill="white"/>
+  
+  <!-- Coffee liquid surface -->
+  <ellipse cx="10" cy="9.5" rx="4" ry="0.5" fill="white" opacity="0.6"/>
+</svg>

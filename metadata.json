@@ -1,15 +1,21 @@
 {
+  "KPackageStructure": "Plasma/Applet",
   "KPlugin": {
-    "Id": "org.example.caffeine-panel-icon",
-    "Name": "Caffeine Toggle",
-    "Description": "Minimal always-on-top wake inhibitor toggle",
+    "Id": "caffeine-panel-icon",
+    "Name": "Caffeine Panel Icon",
+    "Description": "Simple panel toggle to prevent sleep/suspend",
     "Version": "1.0",
-    "License": "MIT"
+    "License": "MIT",
+    "Authors": [
+      {
+        "Name": "JesusF10"
+      }
+    ],
+    "Category": "System Information",
+    "EnabledByDefault": true
   },
   "X-Plasma-API": "declarativeappletscript",
-  "X-Plasma-Provides": [
-    "org.kde.plasma.Applet"
-  ],
-  "X-Plasma-BackgroundHints": "NoBackground",
-  "X-Plasma-RequiredInFullPanel": true
+  "X-Plasma-MainScript": "ui/main.qml",
+  "X-Plasma-API-Minimum-Version": "6.0",
+  "X-KDE-PluginInfo-Name": "caffeine-panel-icon"
 }
