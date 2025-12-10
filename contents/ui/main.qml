@@ -41,38 +41,43 @@ PlasmoidItem {
     
     function enableCaffeine() {
         console.log("Enabling caffeine...");
-        
-        // Method 1: Try caffeine command
-        executable.exec("which caffeine && caffeine &");
-        
-        // Method 2: Use xset to disable screen saver and DPMS
-        executable.exec("xset s off");
-        executable.exec("xset -dpms");
-        
-        // Method 3: Create a simple keep-alive process
-        executable.exec("sh -c 'while true; do echo > /dev/null; sleep 30; done' &");
-        
-        showNotification("Caffeine Enabled", "System sleep/suspend prevented");
+        executable.exec(Qt.resolvedUrl("../code/caffeine-toggle.sh") + " on");
+        showNotification("Caffeine Enabled", "System suspension blocked");
     }
     
     function disableCaffeine() {
         console.log("Disabling caffeine...");
-        
-        // Kill caffeine processes
-        executable.exec("pkill -f caffeine");
-        executable.exec("pkill -f 'while true; do echo'");
-        
-        // Re-enable screen saver and DPMS
-        executable.exec("xset s on");
-        executable.exec("xset +dpms");
-        
-        showNotification("Caffeine Disabled", "System can sleep/suspend normally");
+        executable.exec(Qt.resolvedUrl("../code/caffeine-toggle.sh") + " off");
+        showNotification("Caffeine Disabled", "System can suspend normally");
     }
     
     function showNotification(title, message) {
         console.log("NOTIFICATION:", title, "-", message);
         // Use Plasma's notification system
         executable.exec(`notify-send "${title}" "${message}" -i caffeine`);
+    }
+    
+    // Verification function to check if caffeine is working
+    function verifyCaffeineStatus() {
+        if (caffeineEnabled) {
+            executable.exec("pgrep -f 'systemd-inhibit.*sleep infinity' && echo 'Inhibition active' || echo 'Inhibition not found'");
+            executable.exec("pgrep -f caffeine && echo 'Caffeine process active' || echo 'Caffeine process not found'");
+        }
+    }
+    
+    // Timer to keep checking and refreshing inhibition
+    Timer {
+        id: keepAliveTimer
+        interval: 30000 // 30 seconds
+        running: caffeineEnabled
+        repeat: true
+        onTriggered: {
+            if (caffeineEnabled) {
+                // Refresh the inhibition to make sure it's still active
+                executable.exec("pgrep -f 'systemd-inhibit.*sleep infinity' || systemd-inhibit --what=sleep:idle:handle-power-key:handle-suspend-key:handle-hibernate-key:handle-lid-switch --who='Caffeine Panel' --why='User requested prevent sleep' --mode=block sleep infinity &");
+                console.log("Refreshed caffeine inhibition");
+            }
+        }
     }
     
     compactRepresentation: Rectangle {

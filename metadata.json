@@ -3,19 +3,19 @@
   "KPlugin": {
     "Id": "caffeine-panel-icon",
     "Name": "Caffeine Panel Icon",
-    "Description": "Simple panel toggle to prevent sleep/suspend",
-    "Version": "1.0",
+    "Description": "Lightweight widget to prevent system suspension with subtle activity simulation",
+    "Version": "1.0.0",
     "License": "MIT",
     "Authors": [
       {
-        "Name": "JesusF10"
+        "Name": "JesusF10",
+        "Email": "contact@jesusflores.me"
       }
     ],
     "Category": "System Information",
-    "EnabledByDefault": true
+    "Website": "https://github.com/JesusF10/caffeine-panel-icon"
   },
   "X-Plasma-API": "declarativeappletscript",
   "X-Plasma-MainScript": "ui/main.qml",
-  "X-Plasma-API-Minimum-Version": "6.0",
   "X-KDE-PluginInfo-Name": "caffeine-panel-icon"
 }
