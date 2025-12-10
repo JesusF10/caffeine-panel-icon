@@ -10,16 +10,21 @@ A lightweight, non-intrusive panel widget for KDE Plasma 6 that prevents system 
 
 - **Simple Toggle**: Click to enable/disable suspension prevention
 - **Visual Feedback**: Coffee cup icon changes to show steam when active
-- **Non-Intrusive**: Uses subtle X11 queries every 3 minutes (completely invisible)
 - **Theme Adaptive**: White icons perfect for dark themes
 - **Clear Notifications**: Shows system status with user-friendly messages
 - **Lightweight**: Minimal resource usage
-- **Safe**: No aggressive process killing or system modifications
+- **Safe**: No aggressive process killing or system modifications. Uses subtle X11 queries every 3 minutes.
 
 ## Screenshots
 
 - **Inactive State**: Simple coffee cup (system can suspend normally)
+
+![Inactive State](images/coffee-off.png)
+
 - **Active State**: Coffee cup with steam (system suspension blocked)
+
+![Active State](images/coffee-on.png)
+
 
 ## Quick Install
 
@@ -67,19 +72,7 @@ cd caffeine-panel-icon-main
 
 ## How It Works
 
-The widget uses a gentle approach to prevent system suspension:
-
-1. **Activation**: When you click the widget, it starts a background script
-2. **Activity Simulation**: The script runs `xset q` every 3 minutes
-3. **System Response**: This minimal X11 query is seen as user activity
-4. **Result**: Your system stays awake without any visible interference
-
-### Why This Approach?
-
-- **Non-Intrusive**: No mouse movement or key presses
-- **Reliable**: Works with all power management systems
-- **Safe**: Doesn't interfere with other applications
-- **Efficient**: Minimal system resource usage
+The widget uses a gentle approach to prevent system suspension. When you click the widget, it starts a background script. The script runs `xset q` every 3 minutes, which is seen as user activity by the system, keeping it awake without any visible interference.
 
 ## Usage
 
@@ -87,22 +80,6 @@ The widget uses a gentle approach to prevent system suspension:
 2. **Disable**: Click again - steam disappears and shows "System can suspend normally"
 3. **Status**: The icon clearly shows current state at a glance
 
-## Project Structure
-
-```
-caffeine-panel-icon/
-├── contents/
-│   ├── code/
-│   │   ├── caffeine-toggle.sh    # Main functionality script
-│   │   └── logic.js              # Widget logic (minimal)
-│   ├── icons/
-│   │   ├── coffee.svg            # Inactive state icon
-│   │   └── coffee-steam.svg      # Active state icon
-│   └── ui/
-│       └── main.qml              # Widget interface
-├── metadata.json                 # Widget metadata
-└── install.sh                    # Automatic installer
-```
 
 ## Uninstallation
 
@@ -127,16 +104,8 @@ kpackagetool6 --remove caffeine-panel-icon --type Plasma/Applet
 - Check your power settings haven't overridden the prevention
 
 ## Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature-name`
-3. Commit your changes: `git commit -am 'Add feature'`
-4. Push to the branch: `git push origin feature-name`
-5. Create a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+If you'd like to contribute, I'd love your help!
+It would be great to implement new features like custom automatic suspension schedules or a pomodoro timer.
 
 ## Acknowledgments
 
