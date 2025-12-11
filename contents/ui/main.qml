@@ -57,27 +57,9 @@ PlasmoidItem {
         executable.exec(`notify-send "${title}" "${message}" -i caffeine`);
     }
     
-    // Verification function to check if caffeine is working
+    // Check caffeine status using our script
     function verifyCaffeineStatus() {
-        if (caffeineEnabled) {
-            executable.exec("pgrep -f 'systemd-inhibit.*sleep infinity' && echo 'Inhibition active' || echo 'Inhibition not found'");
-            executable.exec("pgrep -f caffeine && echo 'Caffeine process active' || echo 'Caffeine process not found'");
-        }
-    }
-    
-    // Timer to keep checking and refreshing inhibition
-    Timer {
-        id: keepAliveTimer
-        interval: 30000 // 30 seconds
-        running: caffeineEnabled
-        repeat: true
-        onTriggered: {
-            if (caffeineEnabled) {
-                // Refresh the inhibition to make sure it's still active
-                executable.exec("pgrep -f 'systemd-inhibit.*sleep infinity' || systemd-inhibit --what=sleep:idle:handle-power-key:handle-suspend-key:handle-hibernate-key:handle-lid-switch --who='Caffeine Panel' --why='User requested prevent sleep' --mode=block sleep infinity &");
-                console.log("Refreshed caffeine inhibition");
-            }
-        }
+        executable.exec(Qt.resolvedUrl("../code/caffeine-toggle.sh") + " status");
     }
     
     compactRepresentation: Rectangle {
